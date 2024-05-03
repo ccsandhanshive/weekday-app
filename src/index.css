@@ -4,15 +4,16 @@
   padding: 20px;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
-  background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: cover;
   width: 300px;
   height: 550px;
+  display: inline-block; /* Ensure grid items are displayed inline */
+  transition: transform 0.3s ease-in-out; /* Add transition for smooth transform */
 }
 
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  transform: scale(1.01); /* Scale up the card on hover */
 }
 
 img {
@@ -356,4 +357,9 @@ root {
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
 }
 
-
+.grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+  gap: 30px;
+}
