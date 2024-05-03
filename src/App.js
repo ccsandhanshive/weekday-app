@@ -15,17 +15,32 @@ function JobCard(props) {
   };
   return (
     <div class="card">
-      <div >
-        <h4>{props.company}</h4>
-        <h4>{props.title}</h4>
+      <div className='grid-adj'>
+        <img 
+          src={props.imgurl} 
+          alt="Job Image" 
+          style={{ width: '50px', height: 'auto' }}
+        />
+        <div>
+        <div style={{fontWeight: 'bold',color: 'GrayText'}}><h8>{props.company}</h8></div>
+        <div><h8>{props.title}</h8></div>
+        <h10 style={{fontSize: '12px'}}>{props.location}</h10>
+        </div>
       </div>
-      <p class="cards-sub-text">{props.location}</p>
-      <p>{expanded ? props.description : `${props.description.slice(0, 100)}...`}</p>
+      
+      <div>
+  {expanded ? 
+    props.description : 
+    <p style={{ filter: 'opacity(50%)' }}>
+      {`${props.description.slice(0, 100)}...`}
+    </p>
+  }
+</div>
       <div style={{ textAlign: 'center' }}><a href="#" onClick={toggleDescription}>
           {expanded ? 'Collapse' : 'Read more'}
         </a></div>
-      <div class="MuiBox-root css-1m7bgf1">Minimum experience:</div>
-      <div class="MuiBox-root css-1m7bgf1">{props.experience} Years</div>
+      <div style={{font: '12px Verdana',color: 'GrayText'}}>Minimum experience:</div>
+      <div style={{fontSize: '12px',fontFamily: 'Tahoma'}}>{props.experience} Years</div>
       <button class="apply MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1dyt7kc" tabindex="0" type="button" id="custom-btn" >⚡ Easy Apply<span class="MuiTouchRipple-root css-w0pj6f"></span></button>
     </div>
   );
@@ -91,14 +106,14 @@ function App() {
 
   return (
     <>
-    <Grid>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '20px'}}>
       <FetchData onDataFetched={handleDataFetched} />
       <Filter onFilterChange={handleFilterChange} />
       <FilterCompanyNames onFilterChange={handleComapanyNameChange} />
       <FilterLocations onFilterChange={handleLocationChange} />
       <FilterMinBasePay onFilterChange={handleMinPayChange} />
       <FilterRole onFilterChange={handleRoleChange} />
-      </Grid>
+      </div>
       <Grid>
       {filteredData.map((job, index) => (
       <JobCard
@@ -107,6 +122,7 @@ function App() {
         location={job.location}
         description={job.jobDetailsFromCompany}
         experience={job.minExp}
+        imgurl={job.logoUrl}
       />
     ))}
     </Grid>

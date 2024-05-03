@@ -27,14 +27,13 @@ function FilterCompanyNames({ onFilterChange }) {
   return (
     <div>
       <FetchData onDataFetched={handleDataFetched} />
-      Company Name
       <Multiselect
         options={uniqueCompanyNames.map(company => ({ name: company }))} // Transforming company names into options
         selectedValues={filter.map(company => ({ name: company }))} // Setting initially selected options
         onSelect={handleFilterChange} // Function to handle select event
         onRemove={handleFilterChange} // Function to handle remove event
         displayValue="name" // Property name to display in the dropdown
-        placeholder="Select options" // Placeholder text
+        placeholder="Serch company name" // Placeholder text
         style={multiselectStyles}
       />
     </div>

@@ -27,14 +27,13 @@ function FilterRole({ onFilterChange }) {
   return (
     <div>
       <FetchData onDataFetched={handleDataFetched} />
-      Role
       <Multiselect
         options={uniqueRoles.map(role => ({ uniqueRoles: role }))} // Transforming company names into options
         selectedValues={filter.map(role => ({ uniqueRoles: role }))} // Setting initially selected options
         onSelect={handleFilterChange} // Function to handle select event
         onRemove={handleFilterChange} // Function to handle remove event
         displayValue="uniqueRoles" // Property name to display in the dropdown
-        placeholder="Select options" // Placeholder text
+        placeholder="Roles" // Placeholder text
         style={multiselectStyles}
       />
     </div>

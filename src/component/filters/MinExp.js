@@ -27,14 +27,13 @@ function FilterminExp({ onFilterChange }) {
   return (
     <div>
       <FetchData onDataFetched={handleDataFetched} />
-      Min experience
       <Multiselect
         options={uniqueminExp.map(minExp => ({ uniqueminExp: minExp }))} // Transforming company names into options
         selectedValues={filter.map(minExp => ({ uniqueminExp: minExp }))} // Setting initially selected options
         onSelect={handleFilterChange} // Function to handle select event
         onRemove={handleFilterChange} // Function to handle remove event
         displayValue="uniqueminExp" // Property name to display in the dropdown
-        placeholder="Select options" // Placeholder text
+        placeholder="Experience" // Placeholder text
         style={multiselectStyles}
       />
     </div>

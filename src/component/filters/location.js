@@ -27,7 +27,6 @@ function FilterLocations({ onFilterChange }) {
   return (
     <div>
       <FetchData onDataFetched={handleDataFetched} />
-      Location
       <Multiselect
         options={uniquelocation.map(location => ({ location: location
          }))} // Transforming company names into options
@@ -35,7 +34,7 @@ function FilterLocations({ onFilterChange }) {
         onSelect={handleFilterChange} // Function to handle select event
         onRemove={handleFilterChange} // Function to handle remove event
         displayValue="location" // Property name to display in the dropdown
-        placeholder="Select options" // Placeholder text
+        placeholder="location" // Placeholder text
         style={multiselectStyles}
       />
     </div>
