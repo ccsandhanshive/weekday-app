@@ -8,6 +8,11 @@ import FilterMinBasePay from './component/filters/Minbasepay.js'
 import FilterRole from './component/filters/Role.js'
 
 function JobCard(props) {
+  const [expanded, setExpanded] = useState(false);
+
+  const toggleDescription = () => {
+    setExpanded(!expanded);
+  };
   return (
     <div class="card">
       <div >
@@ -15,7 +20,10 @@ function JobCard(props) {
         <h4>{props.title}</h4>
       </div>
       <p class="cards-sub-text">{props.location}</p>
-      <div class="MuiBox-root css-1m7bgf1">{props.description}</div>
+      <p>{expanded ? props.description : `${props.description.slice(0, 100)}...`}</p>
+      <div style={{ textAlign: 'center' }}><a href="#" onClick={toggleDescription}>
+          {expanded ? 'Collapse' : 'Read more'}
+        </a></div>
       <div class="MuiBox-root css-1m7bgf1">Minimum experience:</div>
       <div class="MuiBox-root css-1m7bgf1">{props.experience} Years</div>
       <button class="apply MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1dyt7kc" tabindex="0" type="button" id="custom-btn" >⚡ Easy Apply<span class="MuiTouchRipple-root css-w0pj6f"></span></button>
@@ -26,13 +34,11 @@ function JobCard(props) {
 function App() {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState(data);
-  const [page, setPage] = useState(1); // Current page of data
-  const [loading, setLoading] = useState(false); // Flag to indicate if data is being fetched
 
 
   useEffect(() => {
-    setFilteredData(data)
-  },[data])
+    setFilteredData(data);
+  }, [data]);
 
   const handleDataFetched = (fetchedData) => {
     setData(fetchedData);

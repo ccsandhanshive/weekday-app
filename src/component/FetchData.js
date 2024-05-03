@@ -6,57 +6,45 @@ function FetchData({ onDataFetched }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetchData();
-  }, [onDataFetched]);
+    // Fetch data here
+    const fetchData = async () => {
+      try {
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
 
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
+        const body = JSON.stringify({
+          "limit": 10,
+          "offset": 0
+        });
 
-      const body = JSON.stringify({
-        "limit": 10000,
-        "offset": 0
-      });
+        const requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body
+        };
 
-      const requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body
-      };
-
-      const response = await fetch("https://api.weekday.technology/adhoc/getSampleJdJSON", requestOptions);
-      const result = await response.json();
-      setData(prevData => [...prevData, ...result.jdList]); // Append new data to existing data
-      onDataFetched(result.jdList); // Pass data to parent component
-    } catch (error) {
-      setError(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleScroll = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop ===
-      document.documentElement.offsetHeight
-    ) {
-      fetchData(); // Fetch more data when user scrolls to bottom
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
+        const response = await fetch("https://api.weekday.technology/adhoc/getSampleJdJSON", requestOptions);
+        const result = await response.json();
+        console.log(result.jdList);
+        setData(result.jdList);
+        setLoading(false); // Set loading to false after data is fetched
+      } catch (error) {
+        console.error(error);
+        setError(error); // Set error state if an error occurs
+        setLoading(false); // Set loading to false even if there's an error
+      }
     };
+
+    fetchData();
   }, []);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  return null;
+  // Pass the fetched data to the parent component
+  onDataFetched(data);
+
+  return null; // Component doesn't render anything directly, data is passed to parent component
 }
 
 export default FetchData;
