@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Grid from './component/Grid'; // Import the Grid component
+import Grid from './component/Grid';
+import Filter from './component/filters/MinExp.js';
+import FetchData from './component/FetchData';
+import FilterCompanyNames from './component/filters/Compayame.js';
+import FilterLocations from './component/filters/location.js'
+import FilterMinBasePay from './component/filters/Minbasepay.js'
+import FilterRole from './component/filters/Role.js'
 
 function JobCard(props) {
   return (
@@ -19,40 +25,76 @@ function JobCard(props) {
 
 function App() {
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState(data);
+  const [page, setPage] = useState(1); // Current page of data
+  const [loading, setLoading] = useState(false); // Flag to indicate if data is being fetched
+
 
   useEffect(() => {
-    // Fetch data here
-    const fetchData = async () => {
-      try {
-        const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+    setFilteredData(data)
+  },[data])
 
-        const body = JSON.stringify({
-          "limit": 10,
-          "offset": 0
-        });
+  const handleDataFetched = (fetchedData) => {
+    setData(fetchedData);
+  };
 
-        const requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          body
-        };
+  const handleFilterChange = (filterValue) => {
+    if (filterValue === '') {
+      setFilteredData(data);
+    } else {
+      const filtered = data.filter(item => item.minExp == filterValue); // Filter based on your data structure
+      setFilteredData(filtered);
+    }
+  };
 
-        const response = await fetch("https://api.weekday.technology/adhoc/getSampleJdJSON", requestOptions);
-        const result = await response.json();
-        console.log(result.jdList);
-        setData(result.jdList);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const handleComapanyNameChange = (filterValue) => {
+    if (filterValue === '') {
+      setFilteredData(data);
+    } else {
+      const filtered = data.filter(item => item.companyName == filterValue); // Filter based on your data structure
+      setFilteredData(filtered);
+    }
+  };
 
-    fetchData();
-  }, []); // Empty dependency array ensures this effect runs only once
+  const handleLocationChange = (filterValue) => {
+    if (filterValue === '') {
+      setFilteredData(data);
+    } else {
+      const filtered = data.filter(item => item.location  == filterValue); // Filter based on your data structure
+      setFilteredData(filtered);
+    }
+  };
+
+  const handleMinPayChange = (filterValue) => {
+    if (filterValue === '') {
+      setFilteredData(data);
+    } else {
+      const filtered = data.filter(item => item.minJdSalary  == filterValue); // Filter based on your data structure
+      setFilteredData(filtered);
+    }
+  };
+
+  const handleRoleChange = (filterValue) => {
+    if (filterValue === '') {
+      setFilteredData(data);
+    } else {
+      const filtered = data.filter(item => item.jobRole == filterValue); // Filter based on your data structure
+      setFilteredData(filtered);
+    }
+  };
 
   return (
+    <>
     <Grid>
-      {data.map((job, index) => (
+      <FetchData onDataFetched={handleDataFetched} />
+      <Filter onFilterChange={handleFilterChange} />
+      <FilterCompanyNames onFilterChange={handleComapanyNameChange} />
+      <FilterLocations onFilterChange={handleLocationChange} />
+      <FilterMinBasePay onFilterChange={handleMinPayChange} />
+      <FilterRole onFilterChange={handleRoleChange} />
+      </Grid>
+      <Grid>
+      {filteredData.map((job, index) => (
       <JobCard
         title={job.jobRole}
         company={job.companyName}
@@ -62,6 +104,7 @@ function App() {
       />
     ))}
     </Grid>
+    </>
   );
 }
 
