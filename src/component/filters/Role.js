@@ -21,7 +21,7 @@ function FilterRole({ onFilterChange }) {
 
   const handleFilterChange = (selectedList) => {
     setFilter(selectedList.map(option => option.uniqueRoles)); // Extracting company names from selected options
-    onFilterChange(selectedList.map(option => option.jobRole));
+    onFilterChange(selectedList.map(option => option.uniqueRoles));
   };
 
   return (

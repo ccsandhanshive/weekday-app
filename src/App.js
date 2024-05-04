@@ -37,7 +37,7 @@ function JobCard(props) {
   }
 </div>
       <div style={{ textAlign: 'center' }}><a href="#" onClick={toggleDescription}>
-          {expanded ? 'Collapse' : 'Read more'}
+          {expanded ? 'Collapse' : 'Expand'}
         </a></div>
       <div style={{font: '12px Verdana',color: 'GrayText'}}>Minimum experience:</div>
       <div style={{fontSize: '12px',fontFamily: 'Tahoma'}}>{props.experience} Years</div>
@@ -48,60 +48,90 @@ function JobCard(props) {
 
 function App() {
   const [data, setData] = useState([]);
-  const [filteredData, setFilteredData] = useState(data);
+  const [filteredData, setFilteredData] = useState([]);
+  const [FilterLocationArray, setFilterLocationArray] = useState([]);
+  const [FilterCompayNameArray, setFilterCompayNameArray] = useState([]);
+  const [FilterMinPayArray, setFilterMinPayArray] = useState([]);
+  const [FilterRoleArray, setFilterRoleArray] = useState([]);
+  const [FilterMinExpArray, setFilterMinExpArray] = useState([]);
 
 
   useEffect(() => {
     setFilteredData(data);
   }, [data]);
 
+  useEffect(() => {
+    refreshCurrentData();
+  }, [FilterLocationArray, FilterCompayNameArray, FilterMinPayArray, FilterRoleArray, FilterMinExpArray]);
+
   const handleDataFetched = (fetchedData) => {
     setData(fetchedData);
   };
 
+  const refreshCurrentData = () => {
+    const filtered = data.filter(item =>
+      (FilterLocationArray.length === 0 || FilterLocationArray.includes(item.location)) &&
+      (FilterCompayNameArray.length === 0 || FilterCompayNameArray.includes(item.companyName)) &&
+      (FilterRoleArray.length === 0 || FilterRoleArray.includes(item.jobRole)) &&
+      (FilterMinExpArray.length === 0 || FilterMinExpArray.includes(`${item.minExp}`)) &&
+      (FilterMinPayArray.length === 0 || FilterMinPayArray.includes(`${item.minJdSalary}`))
+    );
+    setFilteredData(filtered);
+  } 
+
   const handleFilterChange = (filterValue) => {
-    if (filterValue === '') {
-      setFilteredData(data);
-    } else {
-      const filtered = data.filter(item => item.minExp == filterValue); // Filter based on your data structure
-      setFilteredData(filtered);
-    }
+    setFilterMinExpArray(filterValue);
+    // if (filterValue === '') {
+    //   setFilteredData(data);
+    // } else {
+    //   const filtered = data.filter(item => item.minExp == filterValue); // Filter based on your data structure
+    //   setFilteredData(filtered);
+    // }
   };
 
   const handleComapanyNameChange = (filterValue) => {
-    if (filterValue === '') {
-      setFilteredData(data);
-    } else {
-      const filtered = data.filter(item => item.companyName == filterValue); // Filter based on your data structure
-      setFilteredData(filtered);
-    }
+    setFilterCompayNameArray(filterValue)
+    refreshCurrentData()
+    // if (filterValue === '') {
+    //   setFilteredData(data);
+    // } else {
+    //   const filtered = data.filter(item => item.companyName == filterValue); // Filter based on your data structure
+    //   setFilteredData(filtered);
+    // }
   };
 
   const handleLocationChange = (filterValue) => {
-    if (filterValue === '') {
-      setFilteredData(data);
-    } else {
-      const filtered = data.filter(item => item.location  == filterValue); // Filter based on your data structure
-      setFilteredData(filtered);
-    }
+    setFilterLocationArray(filterValue)
+    refreshCurrentData()
+    // if (filterValue === '') {
+    //   setFilteredData(data);
+    // } else {
+    //   const filtered = data.filter(item => item.location  == filterValue); // Filter based on your data structure
+    //   setFilteredData(filtered);
+    // }
   };
 
   const handleMinPayChange = (filterValue) => {
-    if (filterValue === '') {
-      setFilteredData(data);
-    } else {
-      const filtered = data.filter(item => item.minJdSalary  == filterValue); // Filter based on your data structure
-      setFilteredData(filtered);
-    }
+    setFilterMinPayArray(filterValue)
+    refreshCurrentData()
+    // if (filterValue === '') {
+    //   setFilteredData(data);
+    // } else {
+    //   const filtered = data.filter(item => item.minJdSalary  == filterValue); // Filter based on your data structure
+    //   setFilteredData(filtered);
+    // }
   };
 
   const handleRoleChange = (filterValue) => {
-    if (filterValue === '') {
-      setFilteredData(data);
-    } else {
-      const filtered = data.filter(item => item.jobRole == filterValue); // Filter based on your data structure
-      setFilteredData(filtered);
-    }
+    setFilterRoleArray(filterValue)
+    refreshCurrentData()
+    // console.log(filterValue[0])
+    // if (filterValue[0] === undefined) {
+    //   setFilteredData(data);
+    // } else {
+    //   const filtered = data.filter(item => item.jobRole == filterValue); // Filter based on your data structure
+    //   setFilteredData(filtered);
+    // }
   };
 
   return (

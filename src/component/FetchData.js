@@ -13,7 +13,7 @@ function FetchData({ onDataFetched }) {
         myHeaders.append("Content-Type", "application/json");
 
         const body = JSON.stringify({
-          "limit": 10,
+          "limit": 100,
           "offset": 0
         });
 
@@ -37,9 +37,6 @@ function FetchData({ onDataFetched }) {
 
     fetchData();
   }, []);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
 
   // Pass the fetched data to the parent component
   onDataFetched(data);
