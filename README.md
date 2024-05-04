@@ -24,6 +24,7 @@ To clone this project from GitHub, follow these steps:
 
 Before running the project, you need to install its dependencies. Run the following command:
    <p> `npm install` <p>
+   
 > This command will install all the necessary packages listed in the `package.json` file.
 
 ## Run the Project
