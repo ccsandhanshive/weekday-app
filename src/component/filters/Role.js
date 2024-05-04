@@ -20,7 +20,7 @@ function FilterRole({ onFilterChange }) {
   }, [data]);
 
   const handleFilterChange = (selectedList) => {
-    setFilter(selectedList.map(option => option.uniqueRoles)); // Extracting company names from selected options
+    setFilter(selectedList.map(option => option.uniqueRoles));
     onFilterChange(selectedList.map(option => option.uniqueRoles));
   };
 
@@ -28,12 +28,12 @@ function FilterRole({ onFilterChange }) {
     <div>
       <FetchData onDataFetched={handleDataFetched} />
       <Multiselect
-        options={uniqueRoles.map(role => ({ uniqueRoles: role }))} // Transforming company names into options
-        selectedValues={filter.map(role => ({ uniqueRoles: role }))} // Setting initially selected options
-        onSelect={handleFilterChange} // Function to handle select event
-        onRemove={handleFilterChange} // Function to handle remove event
-        displayValue="uniqueRoles" // Property name to display in the dropdown
-        placeholder="Roles" // Placeholder text
+        options={uniqueRoles.map(role => ({ uniqueRoles: role }))}
+        selectedValues={filter.map(role => ({ uniqueRoles: role }))}
+        onSelect={handleFilterChange}
+        onRemove={handleFilterChange}
+        displayValue="uniqueRoles"
+        placeholder="Roles"
         style={multiselectStyles}
       />
     </div>

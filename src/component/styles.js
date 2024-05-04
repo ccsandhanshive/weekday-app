@@ -1,3 +1,4 @@
+//Style for Mutiselection react component
 const multiselectStyles = {
     multiselectContainer: {
       maxWidth: '300px',
@@ -15,7 +16,7 @@ const multiselectStyles = {
       maxHeight: '200px',
     },
     option: {
-      color: '#1c1c1c', // Adjust color of options as needed
+      color: '#1c1c1c',
 
     },
     selectedValues: {

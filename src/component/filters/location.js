@@ -20,7 +20,7 @@ function FilterLocations({ onFilterChange }) {
   }, [data]);
 
   const handleFilterChange = (selectedList) => {
-    setFilter(selectedList.map(option => option.location)); // Extracting company names from selected options
+    setFilter(selectedList.map(option => option.location)); // Extracting locations from selected options
     onFilterChange(selectedList.map(option => option.location));
   };
 
@@ -29,12 +29,12 @@ function FilterLocations({ onFilterChange }) {
       <FetchData onDataFetched={handleDataFetched} />
       <Multiselect
         options={uniquelocation.map(location => ({ location: location
-         }))} // Transforming company names into options
-        selectedValues={filter.map(location => ({ location: location }))} // Setting initially selected options
-        onSelect={handleFilterChange} // Function to handle select event
-        onRemove={handleFilterChange} // Function to handle remove event
-        displayValue="location" // Property name to display in the dropdown
-        placeholder="location" // Placeholder text
+         }))} 
+        selectedValues={filter.map(location => ({ location: location }))}
+        onSelect={handleFilterChange} 
+        onRemove={handleFilterChange} 
+        displayValue="location" 
+        placeholder="location"
         style={multiselectStyles}
       />
     </div>

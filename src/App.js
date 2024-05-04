@@ -33,7 +33,7 @@ function JobCard(props) {
     props.description : 
     <p style={{ filter: 'opacity(50%)' }}>
       {`${props.description.slice(0, 100)}...`}
-    </p>
+    </p> //To limit to a certain number of characters with an option to expand
   }
 </div>
       <div style={{ textAlign: 'center' }}><a href="#" onClick={toggleDescription}>
@@ -61,7 +61,7 @@ function App() {
   }, [data]);
 
   useEffect(() => {
-    refreshCurrentData();
+    refreshCurrentData(); //To update data as per filters
   }, [FilterLocationArray, FilterCompayNameArray, FilterMinPayArray, FilterRoleArray, FilterMinExpArray]);
 
   const handleDataFetched = (fetchedData) => {
@@ -81,57 +81,26 @@ function App() {
 
   const handleFilterChange = (filterValue) => {
     setFilterMinExpArray(filterValue);
-    // if (filterValue === '') {
-    //   setFilteredData(data);
-    // } else {
-    //   const filtered = data.filter(item => item.minExp == filterValue); // Filter based on your data structure
-    //   setFilteredData(filtered);
-    // }
   };
 
   const handleComapanyNameChange = (filterValue) => {
     setFilterCompayNameArray(filterValue)
     refreshCurrentData()
-    // if (filterValue === '') {
-    //   setFilteredData(data);
-    // } else {
-    //   const filtered = data.filter(item => item.companyName == filterValue); // Filter based on your data structure
-    //   setFilteredData(filtered);
-    // }
   };
 
   const handleLocationChange = (filterValue) => {
     setFilterLocationArray(filterValue)
     refreshCurrentData()
-    // if (filterValue === '') {
-    //   setFilteredData(data);
-    // } else {
-    //   const filtered = data.filter(item => item.location  == filterValue); // Filter based on your data structure
-    //   setFilteredData(filtered);
-    // }
   };
 
   const handleMinPayChange = (filterValue) => {
     setFilterMinPayArray(filterValue)
     refreshCurrentData()
-    // if (filterValue === '') {
-    //   setFilteredData(data);
-    // } else {
-    //   const filtered = data.filter(item => item.minJdSalary  == filterValue); // Filter based on your data structure
-    //   setFilteredData(filtered);
-    // }
   };
 
   const handleRoleChange = (filterValue) => {
     setFilterRoleArray(filterValue)
     refreshCurrentData()
-    // console.log(filterValue[0])
-    // if (filterValue[0] === undefined) {
-    //   setFilteredData(data);
-    // } else {
-    //   const filtered = data.filter(item => item.jobRole == filterValue); // Filter based on your data structure
-    //   setFilteredData(filtered);
-    // }
   };
 
   return (

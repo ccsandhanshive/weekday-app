@@ -28,12 +28,12 @@ function FilterMinBasepay({ onFilterChange }) {
     <div>
       <FetchData onDataFetched={handleDataFetched} />
       <Multiselect
-        options={uniqueminbasepay.map(minJdSalary => ({ minJdSalary: minJdSalary }))} // Transforming company names into options
-        selectedValues={filter.map(minJdSalary => ({ minJdSalary: minJdSalary }))} // Setting initially selected options
-        onSelect={handleFilterChange} // Function to handle select event
-        onRemove={handleFilterChange} // Function to handle remove event
-        displayValue="minJdSalary" // Property name to display in the dropdown
-        placeholder="Min base pay salary" // Placeholder text
+        options={uniqueminbasepay.map(minJdSalary => ({ minJdSalary: minJdSalary }))} 
+        selectedValues={filter.map(minJdSalary => ({ minJdSalary: minJdSalary }))} 
+        onSelect={handleFilterChange} 
+        onRemove={handleFilterChange} 
+        displayValue="minJdSalary" 
+        placeholder="Min base pay salary" 
         style={multiselectStyles}
       />
     </div>

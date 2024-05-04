@@ -14,7 +14,7 @@ function FilterCompanyNames({ onFilterChange }) {
 
   useEffect(() => {
     if (data.length > 0) {
-      const companyNames = [...new Set(data.map(job => job.companyName))];
+      const companyNames = [...new Set(data.map(job => job.companyName))]; //To avoid duplicate company names
       setUniqueCompanyNames(companyNames);
     }
   }, [data]);
@@ -30,10 +30,10 @@ function FilterCompanyNames({ onFilterChange }) {
       <Multiselect
         options={uniqueCompanyNames.map(company => ({ name: company }))} // Transforming company names into options
         selectedValues={filter.map(company => ({ name: company }))} // Setting initially selected options
-        onSelect={handleFilterChange} // Function to handle select event
-        onRemove={handleFilterChange} // Function to handle remove event
-        displayValue="name" // Property name to display in the dropdown
-        placeholder="Serch company name" // Placeholder text
+        onSelect={handleFilterChange} 
+        onRemove={handleFilterChange} 
+        displayValue="name" 
+        placeholder="Serch company name"
         style={multiselectStyles}
       />
     </div>
